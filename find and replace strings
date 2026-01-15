@@ -1,0 +1,39 @@
+
+class Solution {
+    static String findAndReplace(String S, int Q, int[] index, String[] sources,
+                                 String[] targets) {
+        // code here
+          
+        StringBuilder ans = new StringBuilder();
+        int n = S.length();
+        
+        int last = 0;
+        
+        for(int i=0; i<Q; i++){
+            int idx = index[i];
+            
+            String source = sources[i];
+            String target = targets[i];
+            
+            int k=idx, j=0;
+            
+            while(k<n && j<source.length()){
+                if(S.charAt(k) == source.charAt(j)){
+                    k++;
+                    j++;
+                } else break;
+            }
+            
+            if(j==source.length() && k<=n){
+                ans.append(S.substring(last, idx));
+                ans.append(target);
+                
+                last = k;
+            }
+        }
+        
+        ans.append(S.substring(last));
+        
+        return ans.toString();
+    }
+};
